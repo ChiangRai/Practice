@@ -1,0 +1,716 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.dao.DocUserMapper">
+  <resultMap id="BaseResultMap" type="com.mybatis.model.DocUser">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="uname" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="pwd" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="code" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="white" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="red" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="money" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="role" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="msgcode" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="msgtime" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="rec_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="audit" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="remember" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="cid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="flag" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="ccid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="timeline" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="sort_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="login_times" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="draw_user" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="draw_phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="draw_bank" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="draw_card" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="province_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="city_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="area_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="con_people" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="con_way" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="con_phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="address" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="qq" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="vip" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="codeimg" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="cimg" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, uname, phone, pwd, code, white, red, money, role, msgcode, msgtime, rec_id, audit, 
+    status, remember, cid, flag, ccid, timeline, sort_id, login_times, draw_user, draw_phone, 
+    draw_bank, draw_card, province_name, city_name, area_name, con_people, con_way, con_phone, 
+    address, qq, email, vip, codeimg, cimg
+  </sql>
+  <select id="selectByExample" parameterType="com.mybatis.model.DocUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from boc_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from boc_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from boc_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mybatis.model.DocUserExample">
+    delete from boc_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mybatis.model.DocUser">
+    insert into boc_user (id, uname, phone, 
+      pwd, code, white, red, 
+      money, role, msgcode, 
+      msgtime, rec_id, audit, 
+      status, remember, cid, 
+      flag, ccid, timeline, 
+      sort_id, login_times, draw_user, 
+      draw_phone, draw_bank, draw_card, 
+      province_name, city_name, area_name, 
+      con_people, con_way, con_phone, 
+      address, qq, email, 
+      vip, codeimg, cimg)
+    values (#{id,jdbcType=INTEGER}, #{uname,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{pwd,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{white,jdbcType=VARCHAR}, #{red,jdbcType=VARCHAR}, 
+      #{money,jdbcType=DECIMAL}, #{role,jdbcType=INTEGER}, #{msgcode,jdbcType=VARCHAR}, 
+      #{msgtime,jdbcType=INTEGER}, #{recId,jdbcType=INTEGER}, #{audit,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{remember,jdbcType=VARCHAR}, #{cid,jdbcType=INTEGER}, 
+      #{flag,jdbcType=INTEGER}, #{ccid,jdbcType=INTEGER}, #{timeline,jdbcType=INTEGER}, 
+      #{sortId,jdbcType=INTEGER}, #{loginTimes,jdbcType=INTEGER}, #{drawUser,jdbcType=VARCHAR}, 
+      #{drawPhone,jdbcType=VARCHAR}, #{drawBank,jdbcType=VARCHAR}, #{drawCard,jdbcType=VARCHAR}, 
+      #{provinceName,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, #{areaName,jdbcType=VARCHAR}, 
+      #{conPeople,jdbcType=VARCHAR}, #{conWay,jdbcType=VARCHAR}, #{conPhone,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{vip,jdbcType=INTEGER}, #{codeimg,jdbcType=VARCHAR}, #{cimg,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mybatis.model.DocUser">
+    insert into boc_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uname != null">
+        uname,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="pwd != null">
+        pwd,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="white != null">
+        white,
+      </if>
+      <if test="red != null">
+        red,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+      <if test="msgcode != null">
+        msgcode,
+      </if>
+      <if test="msgtime != null">
+        msgtime,
+      </if>
+      <if test="recId != null">
+        rec_id,
+      </if>
+      <if test="audit != null">
+        audit,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="remember != null">
+        remember,
+      </if>
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="ccid != null">
+        ccid,
+      </if>
+      <if test="timeline != null">
+        timeline,
+      </if>
+      <if test="sortId != null">
+        sort_id,
+      </if>
+      <if test="loginTimes != null">
+        login_times,
+      </if>
+      <if test="drawUser != null">
+        draw_user,
+      </if>
+      <if test="drawPhone != null">
+        draw_phone,
+      </if>
+      <if test="drawBank != null">
+        draw_bank,
+      </if>
+      <if test="drawCard != null">
+        draw_card,
+      </if>
+      <if test="provinceName != null">
+        province_name,
+      </if>
+      <if test="cityName != null">
+        city_name,
+      </if>
+      <if test="areaName != null">
+        area_name,
+      </if>
+      <if test="conPeople != null">
+        con_people,
+      </if>
+      <if test="conWay != null">
+        con_way,
+      </if>
+      <if test="conPhone != null">
+        con_phone,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="vip != null">
+        vip,
+      </if>
+      <if test="codeimg != null">
+        codeimg,
+      </if>
+      <if test="cimg != null">
+        cimg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uname != null">
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="white != null">
+        #{white,jdbcType=VARCHAR},
+      </if>
+      <if test="red != null">
+        #{red,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=INTEGER},
+      </if>
+      <if test="msgcode != null">
+        #{msgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="msgtime != null">
+        #{msgtime,jdbcType=INTEGER},
+      </if>
+      <if test="recId != null">
+        #{recId,jdbcType=INTEGER},
+      </if>
+      <if test="audit != null">
+        #{audit,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remember != null">
+        #{remember,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="ccid != null">
+        #{ccid,jdbcType=INTEGER},
+      </if>
+      <if test="timeline != null">
+        #{timeline,jdbcType=INTEGER},
+      </if>
+      <if test="sortId != null">
+        #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="loginTimes != null">
+        #{loginTimes,jdbcType=INTEGER},
+      </if>
+      <if test="drawUser != null">
+        #{drawUser,jdbcType=VARCHAR},
+      </if>
+      <if test="drawPhone != null">
+        #{drawPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="drawBank != null">
+        #{drawBank,jdbcType=VARCHAR},
+      </if>
+      <if test="drawCard != null">
+        #{drawCard,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceName != null">
+        #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null">
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null">
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="conPeople != null">
+        #{conPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="conWay != null">
+        #{conWay,jdbcType=VARCHAR},
+      </if>
+      <if test="conPhone != null">
+        #{conPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="vip != null">
+        #{vip,jdbcType=INTEGER},
+      </if>
+      <if test="codeimg != null">
+        #{codeimg,jdbcType=VARCHAR},
+      </if>
+      <if test="cimg != null">
+        #{cimg,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mybatis.model.DocUserExample" resultType="java.lang.Long">
+    select count(*) from boc_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update boc_user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.uname != null">
+        uname = #{record.uname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pwd != null">
+        pwd = #{record.pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null">
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.white != null">
+        white = #{record.white,jdbcType=VARCHAR},
+      </if>
+      <if test="record.red != null">
+        red = #{record.red,jdbcType=VARCHAR},
+      </if>
+      <if test="record.money != null">
+        money = #{record.money,jdbcType=DECIMAL},
+      </if>
+      <if test="record.role != null">
+        role = #{record.role,jdbcType=INTEGER},
+      </if>
+      <if test="record.msgcode != null">
+        msgcode = #{record.msgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msgtime != null">
+        msgtime = #{record.msgtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.recId != null">
+        rec_id = #{record.recId,jdbcType=INTEGER},
+      </if>
+      <if test="record.audit != null">
+        audit = #{record.audit,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.remember != null">
+        remember = #{record.remember,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cid != null">
+        cid = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.flag != null">
+        flag = #{record.flag,jdbcType=INTEGER},
+      </if>
+      <if test="record.ccid != null">
+        ccid = #{record.ccid,jdbcType=INTEGER},
+      </if>
+      <if test="record.timeline != null">
+        timeline = #{record.timeline,jdbcType=INTEGER},
+      </if>
+      <if test="record.sortId != null">
+        sort_id = #{record.sortId,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginTimes != null">
+        login_times = #{record.loginTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.drawUser != null">
+        draw_user = #{record.drawUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drawPhone != null">
+        draw_phone = #{record.drawPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drawBank != null">
+        draw_bank = #{record.drawBank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drawCard != null">
+        draw_card = #{record.drawCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceName != null">
+        province_name = #{record.provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityName != null">
+        city_name = #{record.cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaName != null">
+        area_name = #{record.areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conPeople != null">
+        con_people = #{record.conPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conWay != null">
+        con_way = #{record.conWay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conPhone != null">
+        con_phone = #{record.conPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qq != null">
+        qq = #{record.qq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vip != null">
+        vip = #{record.vip,jdbcType=INTEGER},
+      </if>
+      <if test="record.codeimg != null">
+        codeimg = #{record.codeimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cimg != null">
+        cimg = #{record.cimg,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update boc_user
+    set id = #{record.id,jdbcType=INTEGER},
+      uname = #{record.uname,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      pwd = #{record.pwd,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      white = #{record.white,jdbcType=VARCHAR},
+      red = #{record.red,jdbcType=VARCHAR},
+      money = #{record.money,jdbcType=DECIMAL},
+      role = #{record.role,jdbcType=INTEGER},
+      msgcode = #{record.msgcode,jdbcType=VARCHAR},
+      msgtime = #{record.msgtime,jdbcType=INTEGER},
+      rec_id = #{record.recId,jdbcType=INTEGER},
+      audit = #{record.audit,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      remember = #{record.remember,jdbcType=VARCHAR},
+      cid = #{record.cid,jdbcType=INTEGER},
+      flag = #{record.flag,jdbcType=INTEGER},
+      ccid = #{record.ccid,jdbcType=INTEGER},
+      timeline = #{record.timeline,jdbcType=INTEGER},
+      sort_id = #{record.sortId,jdbcType=INTEGER},
+      login_times = #{record.loginTimes,jdbcType=INTEGER},
+      draw_user = #{record.drawUser,jdbcType=VARCHAR},
+      draw_phone = #{record.drawPhone,jdbcType=VARCHAR},
+      draw_bank = #{record.drawBank,jdbcType=VARCHAR},
+      draw_card = #{record.drawCard,jdbcType=VARCHAR},
+      province_name = #{record.provinceName,jdbcType=VARCHAR},
+      city_name = #{record.cityName,jdbcType=VARCHAR},
+      area_name = #{record.areaName,jdbcType=VARCHAR},
+      con_people = #{record.conPeople,jdbcType=VARCHAR},
+      con_way = #{record.conWay,jdbcType=VARCHAR},
+      con_phone = #{record.conPhone,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      qq = #{record.qq,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      vip = #{record.vip,jdbcType=INTEGER},
+      codeimg = #{record.codeimg,jdbcType=VARCHAR},
+      cimg = #{record.cimg,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mybatis.model.DocUser">
+    update boc_user
+    <set>
+      <if test="uname != null">
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="white != null">
+        white = #{white,jdbcType=VARCHAR},
+      </if>
+      <if test="red != null">
+        red = #{red,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="role != null">
+        role = #{role,jdbcType=INTEGER},
+      </if>
+      <if test="msgcode != null">
+        msgcode = #{msgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="msgtime != null">
+        msgtime = #{msgtime,jdbcType=INTEGER},
+      </if>
+      <if test="recId != null">
+        rec_id = #{recId,jdbcType=INTEGER},
+      </if>
+      <if test="audit != null">
+        audit = #{audit,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remember != null">
+        remember = #{remember,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null">
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="ccid != null">
+        ccid = #{ccid,jdbcType=INTEGER},
+      </if>
+      <if test="timeline != null">
+        timeline = #{timeline,jdbcType=INTEGER},
+      </if>
+      <if test="sortId != null">
+        sort_id = #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="loginTimes != null">
+        login_times = #{loginTimes,jdbcType=INTEGER},
+      </if>
+      <if test="drawUser != null">
+        draw_user = #{drawUser,jdbcType=VARCHAR},
+      </if>
+      <if test="drawPhone != null">
+        draw_phone = #{drawPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="drawBank != null">
+        draw_bank = #{drawBank,jdbcType=VARCHAR},
+      </if>
+      <if test="drawCard != null">
+        draw_card = #{drawCard,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceName != null">
+        province_name = #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null">
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null">
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="conPeople != null">
+        con_people = #{conPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="conWay != null">
+        con_way = #{conWay,jdbcType=VARCHAR},
+      </if>
+      <if test="conPhone != null">
+        con_phone = #{conPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="vip != null">
+        vip = #{vip,jdbcType=INTEGER},
+      </if>
+      <if test="codeimg != null">
+        codeimg = #{codeimg,jdbcType=VARCHAR},
+      </if>
+      <if test="cimg != null">
+        cimg = #{cimg,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mybatis.model.DocUser">
+    update boc_user
+    set uname = #{uname,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      white = #{white,jdbcType=VARCHAR},
+      red = #{red,jdbcType=VARCHAR},
+      money = #{money,jdbcType=DECIMAL},
+      role = #{role,jdbcType=INTEGER},
+      msgcode = #{msgcode,jdbcType=VARCHAR},
+      msgtime = #{msgtime,jdbcType=INTEGER},
+      rec_id = #{recId,jdbcType=INTEGER},
+      audit = #{audit,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      remember = #{remember,jdbcType=VARCHAR},
+      cid = #{cid,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=INTEGER},
+      ccid = #{ccid,jdbcType=INTEGER},
+      timeline = #{timeline,jdbcType=INTEGER},
+      sort_id = #{sortId,jdbcType=INTEGER},
+      login_times = #{loginTimes,jdbcType=INTEGER},
+      draw_user = #{drawUser,jdbcType=VARCHAR},
+      draw_phone = #{drawPhone,jdbcType=VARCHAR},
+      draw_bank = #{drawBank,jdbcType=VARCHAR},
+      draw_card = #{drawCard,jdbcType=VARCHAR},
+      province_name = #{provinceName,jdbcType=VARCHAR},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      con_people = #{conPeople,jdbcType=VARCHAR},
+      con_way = #{conWay,jdbcType=VARCHAR},
+      con_phone = #{conPhone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      vip = #{vip,jdbcType=INTEGER},
+      codeimg = #{codeimg,jdbcType=VARCHAR},
+      cimg = #{cimg,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
